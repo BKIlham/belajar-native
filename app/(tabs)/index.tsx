@@ -1,4 +1,5 @@
 import "@/global.css";
+import { useRouter } from "expo-router";
 import React from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -22,8 +23,21 @@ const TRANSACTIONS = [
 ];
 
 export default function App() {
+  const router = useRouter();
   const renderItem = ({item}: {item: any}) => (
-    <TouchableOpacity className="bg-white p-4 mb-3 rounded-xl flex-row justify-between items-center shadow-sm border border-slate-100">
+    <TouchableOpacity 
+      className="bg-white p-4 mb-3 rounded-xl flex-row justify-between items-center shadow-sm border border-slate-100"
+      onPress={() => router.push({
+        pathname: "/detail/[id]",
+        params: {
+          id : item.id,
+          title: item.title,
+          amount: item.amount,
+          date: item.date,
+          type: item.type
+        }
+      })}
+    >
       <View className="flex-row items-center gap 3">
         <View className={`w-10 h-10 rounded-full items-center justify-center ${item.type === 'in' ? 'bg-green-100' : 'bg-red-100'}`}>
           <Text className="text-xl">{item.type === 'in' ? '💰' : '💸'}</Text>
