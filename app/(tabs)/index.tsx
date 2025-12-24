@@ -1,7 +1,7 @@
 import "@/global.css";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, TouchableOpacity, View, ActivityIndicator } from "react-native";
+import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 interface User {
@@ -55,6 +55,7 @@ export default function App() {
           Daftar User API 🌐
         </Text>
         
+        
         {isLoading ? (
           <View className="flex-1 justify-center items-center">
             <ActivityIndicator size="large" color="#2563eb"/>
@@ -70,6 +71,12 @@ export default function App() {
             contentContainerStyle={{ paddingBottom: 20 }}
           />
         )}
+        <TouchableOpacity
+          onPress={() => router.push('/create')}
+          className="absolute bottom-8 right-5 bg-blue-600 w-14 h-14 justify-center items-center rounded-full shadow-lg elevation-xl"
+        >
+          <Text className="text-white text-3xl font-bold pb-1">+</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaProvider>
   );
