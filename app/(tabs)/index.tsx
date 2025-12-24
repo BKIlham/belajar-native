@@ -1,4 +1,5 @@
 import "@/global.css";
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react-native";
@@ -35,11 +36,14 @@ export default function App() {
       className="bg-white p-4 mb-3 rounded-xl border border-slate-100 flex-row item-center gap-4"
       onPress={() => alert(`Kamu memilih ${item.name}`)}
     >
-      <View className="w-12 h-12 bg-blue-100 rounded-full items-center justify-center">
-        <Text className="text-xl font-bold text-blue-600">
-          {item.name.charAt(0)}
-        </Text>
+      <View className={`w-12 h-12 bg-blue-100 rounded-full items-center justify-center ${item.id % 2 === 0 ? 'bg-green-100' : 'bg-orange-100'}`}>
+        <FontAwesome5 
+          name={"user-alt"}
+          size={20}
+          color={item.id %2 === 0 ? "green" : "orange"}
+        />
       </View>
+      
       
       <View>
         <Text className="font-bold text-slate-800 text-lg">{item.name}</Text>
@@ -75,7 +79,7 @@ export default function App() {
           onPress={() => router.push('/create')}
           className="absolute bottom-8 right-5 bg-blue-600 w-14 h-14 justify-center items-center rounded-full shadow-lg elevation-xl"
         >
-          <Text className="text-white text-3xl font-bold pb-1">+</Text>
+          <Ionicons name="add" size={32} color="white"/>
         </TouchableOpacity>
       </View>
     </SafeAreaProvider>
